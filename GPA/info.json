@@ -1,0 +1,70 @@
+{
+    "appName": "GPA Calculator",
+    "theme": {
+      "background": "light blue",
+      "primaryColor": "dark teal"
+    },
+    "inputs": {
+      "courses": [
+        {
+          "courseName": "Course 1",
+          "creditHours": 3,
+          "grade": "A"
+        },
+        {
+          "courseName": "Course 2",
+          "creditHours": 4,
+          "grade": "B+"
+        }
+      ],
+      "addCourse": {
+        "label": "Add Course",
+        "enabled": true
+      }
+    },
+    "gradeScale": {
+      "A+": 4.0,
+      "A": 4.0,
+      "A-": 3.7,
+      "B+": 3.3,
+      "B": 3.0,
+      "B-": 2.7,
+      "C+": 2.3,
+      "C": 2.0,
+      "C-": 1.7,
+      "D": 1.0,
+      "F": 0.0
+    },
+    "outputs": {
+      "totalCredits": {
+        "label": "Total Credit Hours",
+        "value": 7
+      },
+      "gpa": {
+        "label": "Calculated GPA",
+        "value": 3.57
+      }
+    },
+    "buttons": {
+      "calculate": {
+        "label": "CALCULATE",
+        "enabled": true
+      },
+      "reset": {
+        "label": "RESET",
+        "enabled": true
+      }
+    },
+    "validation": {
+      "grade": {
+        "allowedValues": ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F"],
+        "errorMessage": "Invalid grade entered"
+      },
+      "creditHours": {
+        "min": 1,
+        "max": 6,
+        "errorMessage": "Credit hours must be between 1 and 6"
+      }
+    }
+  }
+  

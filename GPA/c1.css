@@ -1,0 +1,466 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000000; /* Black background */
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Hexagram animation elements */
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.hexagram {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 0.3;
+    transform: scale(0.8);
+}
+
+.hexagram.activated {
+    opacity: 0.8;
+    transform: scale(1.2);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hexagram::before,
+.hexagram::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+}
+
+.hexagram::before {
+    border-bottom: 35px solid #00ff88;
+    top: -35px;
+    left: -20px;
+    filter: drop-shadow(0 0 15px rgba(0, 255, 136, 0.8)) drop-shadow(0 0 30px rgba(0, 255, 136, 0.4));
+    animation: shine 3s ease-in-out infinite;
+}
+
+.hexagram::after {
+    border-top: 35px solid #00ccff;
+    top: 0;
+    left: -20px;
+    filter: drop-shadow(0 0 15px rgba(0, 204, 255, 0.8)) drop-shadow(0 0 30px rgba(0, 204, 255, 0.4));
+    animation: shine 3s ease-in-out infinite reverse;
+}
+
+.hexagram:nth-child(1) {
+    width: 40px;
+    height: 35px;
+    animation-delay: 0s;
+}
+
+.hexagram:nth-child(2) {
+    width: 60px;
+    height: 52px;
+    animation-delay: 0.5s;
+}
+
+.hexagram:nth-child(3) {
+    width: 30px;
+    height: 26px;
+    animation-delay: 1s;
+}
+
+.hexagram:nth-child(4) {
+    width: 50px;
+    height: 43px;
+    animation-delay: 1.5s;
+}
+
+.hexagram:nth-child(5) {
+    width: 70px;
+    height: 61px;
+    animation-delay: 2s;
+}
+
+.hexagram:nth-child(6) {
+    width: 35px;
+    height: 30px;
+    animation-delay: 2.5s;
+}
+
+/* Hexagram rotation animation */
+@keyframes hexagramRotate {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0.2;
+    }
+    25% {
+        transform: rotate(90deg);
+        opacity: 0.6;
+    }
+    50% {
+        transform: rotate(180deg);
+        opacity: 0.4;
+    }
+    75% {
+        transform: rotate(270deg);
+        opacity: 0.7;
+    }
+    100% {
+        transform: rotate(360deg);
+        opacity: 0.2;
+    }
+}
+
+@keyframes shine {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(0, 255, 136, 0.3)) drop-shadow(0 0 10px rgba(0, 255, 136, 0.2));
+        opacity: 0.3;
+    }
+    50% {
+        filter: drop-shadow(0 0 20px rgba(0, 255, 136, 1)) drop-shadow(0 0 40px rgba(0, 255, 136, 0.6));
+        opacity: 1;
+    }
+    100% {
+        filter: drop-shadow(0 0 5px rgba(0, 255, 136, 0.3)) drop-shadow(0 0 10px rgba(0, 255, 136, 0.2));
+        opacity: 0.3;
+    }
+}
+
+.hexagram.animate {
+    animation: hexagramRotate 4s linear infinite;
+}
+
+/* Mouse interaction effect removed */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    color: #006666; /* Dark teal primary color */
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+h2, h3 {
+    color: #006666; /* Dark teal primary color */
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.course-input {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.course-input::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: liquidFlow 3s ease-in-out infinite;
+}
+
+@keyframes liquidFlow {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+    min-width: 120px;
+}
+
+input, select {
+    padding: 8px 12px;
+    border: 2px solid #DDD;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #006666; /* Dark teal focus color */
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.btn-primary {
+    background-color: #006666; /* Dark teal */
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #004D4D;
+    transform: translateY(-2px);
+}
+
+.btn-calculate {
+    background-color: #28A745;
+    color: white;
+}
+
+.btn-calculate:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.btn-reset {
+    background-color: #DC3545;
+    color: white;
+}
+
+.btn-reset:hover {
+    background-color: #C82333;
+    transform: translateY(-2px);
+}
+
+.courses-list {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.courses-list::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    animation: liquidFlow 4s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+.course-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin: 10px 0;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.course-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.course-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.course-item:hover::before {
+    left: 100%;
+}
+
+.course-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.course-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.course-grade {
+    color: #006666;
+    font-weight: bold;
+}
+
+.course-credits {
+    color: #666;
+}
+
+.remove-btn {
+    background-color: #DC3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.remove-btn:hover {
+    background-color: #C82333;
+}
+
+.results {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 102, 102, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.results::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 102, 102, 0.1), transparent);
+    animation: liquidFlow 5s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.result-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.result-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 102, 102, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.result-item:hover::before {
+    left: 100%;
+}
+
+.result-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.result-value {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ff0000; /* Red */
+}
+
+.error-message {
+    color: #DC3545;
+    background-color: #F8D7DA;
+    border: 1px solid #F5C6CB;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+#coursesDisplay:empty::before {
+    content: "No courses added yet";
+    color: #666;
+    font-style: italic;
+}
